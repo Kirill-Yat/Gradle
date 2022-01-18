@@ -7,9 +7,8 @@ sourceCompatibility = 1.7
 targetCompatibility = 1.7
 
 
-
- clean.doLast {
-   file('${buildDir}/libs').deleteDir()
+clean.doFirst {
+    delete '${buildDir}'
 }
 
 
@@ -18,6 +17,8 @@ jar {
         attributes 'Main-Class': 'com.test.Project'
     }
 }
+
+
 
 
 
@@ -36,7 +37,7 @@ repositories {
 dependencies {
     // Use JUnit test framework.
     testImplementation 'junit:junit:4.13.2'
-
+    
     // This dependency is used by the application.
     implementation 'com.google.guava:guava:30.1.1-jre'
 }
