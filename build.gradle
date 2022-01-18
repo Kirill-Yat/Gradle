@@ -7,13 +7,9 @@ sourceCompatibility = 1.7
 targetCompatibility = 1.7
 
 
-task(cleann) {
-    doFirst 
-    {
-        delete "${buildDir} "
-    }
+clean.doFirst {
+    file('${buildDir}').deleteDir()
 }
-
 
 jar {
     manifest{
