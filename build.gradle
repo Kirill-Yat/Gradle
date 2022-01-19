@@ -15,10 +15,11 @@ jar {
         attributes 'Main-Class': 'com.test.Project'
     }
 }
+
 /*
-task(build) {
-    compile 'com.test.Project'
-    compile 'com.test.UnitTest'
+build {
+    compile 'com.test.Project.java'
+    compile 'com.test.UnitTest.java'
 }
 */
 
