@@ -1,15 +1,14 @@
 
 apply plugin: 'java'
 apply plugin: 'base'
+apply plugin: 'maven-publish'
 
 version = '1.0'
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
 
 
-clean.doFirst {
-   
-}
+
 
 jar {
     manifest{
@@ -22,6 +21,8 @@ task(build) {
     compile 'com.test.UnitTest'
 }
 */
+
+
 
 test { 
     useJUnit()
