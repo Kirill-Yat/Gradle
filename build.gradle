@@ -8,7 +8,7 @@ targetCompatibility = 1.7
 
 
 clean.doFirst {
-    file('${buildDir}').deleteDir()
+   
 }
 
 jar {
@@ -16,15 +16,22 @@ jar {
         attributes 'Main-Class': 'com.test.Project'
     }
 }
+/*
+task(build) {
+    compile 'com.test.Project'
+    compile 'com.test.UnitTest'
+}
+*/
+
+test { 
+    useJUnit()
+}
 
 
 
-
-
-task(hello) {
-    doFirst {
+task hello (dependsOn: test)  {
         println "Hello World"
-    }
+    
 }
 
 
