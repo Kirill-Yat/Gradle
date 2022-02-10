@@ -2,12 +2,17 @@
 apply plugin: 'java'
 apply plugin: 'base'
 apply plugin: 'maven-publish'
+apply plugin: 'jacoco'
 
 version = '1.0'
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
 
-
+configurations {
+    cucumberRuntime {
+        extendsFrom testImplementation
+    }
+}
 
 
 jar {
@@ -15,14 +20,6 @@ jar {
         attributes 'Main-Class': 'com.test.Project'
     }
 }
-
-/*
-build {
-    compile 'com.test.Project.java'
-    compile 'com.test.UnitTest.java'
-}
-*/
-
 
 
 test { 
@@ -36,6 +33,17 @@ task hello  {
     
 }
 
+task cucumber() {
+    dependsOn assemble, testClasses
+    doLast {
+        javaexec {
+            main = "io.cucumber.core.cli.Main"
+            classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+            args = ['--plugin', 'pretty', '--glue', 'gradle.cucumber', 'src/test/resources']
+        }
+    }
+}
+
 
 repositories {
     // Use Maven Central for resolving dependencies.
@@ -45,7 +53,7 @@ repositories {
 dependencies {
     // Use JUnit test framework.
     testImplementation 'junit:junit:4.13.2'
-
+    testImplementation 'io.cucumber:cucumber-java:7.0.0'
     // This dependency is used by the application.
     implementation 'com.google.guava:guava:30.1.1-jre'
 }
